@@ -2,9 +2,15 @@
 
 Desktop POS and Inventory System for Aqua Plus.
 
-## Team Instructions
+## 📌 Team Git Instructions
 
-To start working on your assigned feature, please download this base project to your laptop by running the following command in your terminal:
-
+### 1. Download the Project (Do this ONLY ONCE)
+Open your terminal/command prompt, navigate to where you want to save the project, and run:
 ```bash
 git clone [https://github.com/DarkNorito/aqua-plus-pos-system.git](https://github.com/DarkNorito/aqua-plus-pos-system.git)
+
+#2. Enter the Folder and Switch to Your Branch
+Move into the downloaded project folder and switch to your specifically assigned feature branch:
+
+cd aqua-plus-pos-system
+git checkout <your-assigned-branch-name>
