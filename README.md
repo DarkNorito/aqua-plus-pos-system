@@ -9,3 +9,10 @@ Open your terminal/command prompt, navigate to the folder where you want to save
 
 ```bash
 git clone [https://github.com/DarkNorito/aqua-plus-pos-system.git](https://github.com/DarkNorito/aqua-plus-pos-system.git)
+
+2. Enter the Folder and Switch to Your Branch
+Move into the downloaded project folder and switch to your specifically assigned feature branch:
+
+Bash
+cd aqua-plus-pos-system
+git checkout <your-assigned-branch-name>
