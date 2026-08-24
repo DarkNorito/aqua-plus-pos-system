@@ -25,7 +25,7 @@ cd aqua-plus-pos-system
 git checkout <your-assigned-branch-name>
 ```
 
-## Afer you selecting your specific branch, you can minimize the terminal and open the project folder in NETBEANS and do your coding
+### After you selecting your specific branch, you can minimize the terminal and open the project folder in NETBEANS and do your coding
 
 3. Save & Upload Your Daily Work (Do this EVERY DAY)
 When you are done dragging and dropping UI elements or writing code in NetBeans for the day, upload it safely to GitHub:
@@ -34,5 +34,18 @@ When you are done dragging and dropping UI elements or writing code in NetBeans 
 git add .
 git commit -m "Describe what you did (e.g., Finished the POS checkout UI)"
 git push origin <your-assigned-branch-name>
+```
+
+ ### ❌gift fetch command - see all branches (DO NOT RUN THIS COMAND❌)
+ ``` bash
+git fetch
+```
+
+### ❌AFTER EDITING README (DO NOT RUN THIS COMAND❌)
+
+ ``` bash
+git checkout main
+git pull origin main
+git checkout <your branch name>
 ```
 
