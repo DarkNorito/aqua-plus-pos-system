@@ -4,6 +4,12 @@ Desktop POS and Inventory System for Aqua Plus.
 
 ## 📌 Team Git Instructions
 
+### Download GIT (if you dont have)
+
+```bash
+https://git-scm.com/install/windows
+```
+
 ### 1. Download the Project (Do this ONLY ONCE)
 Open your terminal/command prompt, navigate to the folder where you want to save the project, and run:
 
