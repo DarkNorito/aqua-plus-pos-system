@@ -4,7 +4,7 @@ Desktop POS and Inventory System for Aqua Plus.
 
 ## 📌 Team Git Instructions
 
-### Download GIT (if you dont have)
+### Download GIT and execute it (if you dont have)
 
 ```bash
 https://git-scm.com/install/windows
