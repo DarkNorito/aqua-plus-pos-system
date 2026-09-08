@@ -8,7 +8,122 @@ public class Home extends javax.swing.JFrame {
     
     public Home() {
         initComponents();
+        getContentPane().setBackground(java.awt.Color.BLACK);
         this.setExtendedState(Home.MAXIMIZED_BOTH);
+        
+        
+        
+        
+        
+        
+        // --- AQUA PARTICLE FOUNTAIN (IDLE SCREEN) ---
+        class Particle {
+            double x, y, vx, vy;
+            int life, maxLife;
+            java.awt.Color color;
+            
+            Particle(int w, int h) {
+                x = w / 2.0; // Start at the exact horizontal center
+                y = h;       // Start at the bottom of the panel
+                vx = (Math.random() - 0.5) * 6; // Spread outwards left and right
+                vy = -Math.random() * 12 - 5;   // Initial upward burst
+                maxLife = (int)(Math.random() * 40 + 30);
+                life = maxLife;
+                // Generate random Aqua/Cyan/Blue water colors
+                color = new java.awt.Color(0, (int)(Math.random() * 100 + 155), 255); 
+            }
+        }
+
+        javax.swing.JPanel fountainPanel = new javax.swing.JPanel() {
+            java.util.ArrayList<Particle> particles = new java.util.ArrayList<>();
+            javax.swing.Timer pTimer;
+            {
+                setOpaque(false); // Make the background transparent
+                pTimer = new javax.swing.Timer(16, e -> { // Run at ~60 FPS
+                    int w = getWidth(), h = getHeight();
+                    if (w > 0 && h > 0) {
+                        // Spawn 5 new water droplets every frame
+                        for (int i = 0; i < 5; i++) particles.add(new Particle(w, h)); 
+                    }
+                    // Apply gravity and update droplet positions
+                    for (int i = particles.size() - 1; i >= 0; i--) {
+                        Particle p = particles.get(i);
+                        p.x += p.vx;
+                        p.vy += 0.5; // Gravity pulling the water down
+                        p.y += p.vy;
+                        p.life--;
+                        if (p.life <= 0) particles.remove(i); // Remove dead droplets
+                    }
+                    repaint();
+                });
+                pTimer.start();
+            }
+            
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                super.paintComponent(g);
+                java.awt.Graphics2D g2d = (java.awt.Graphics2D) g;
+                // Turn on anti-aliasing for smooth, high-quality circles
+                g2d.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+                for (Particle p : particles) {
+                    // Fade out as they fall
+                    int alpha = Math.max(0, (int) (255 * ((double) p.life / p.maxLife)));
+                    g2d.setColor(new java.awt.Color(p.color.getRed(), p.color.getGreen(), p.color.getBlue(), alpha));
+                    g2d.fillOval((int) p.x, (int) p.y, 10, 10);
+                }
+            }
+        };
+        
+        // Inject the fountain into the empty panel_load
+        panel_load.setLayout(new java.awt.BorderLayout());
+        panel_load.add(fountainPanel, java.awt.BorderLayout.CENTER);
+        // ---------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+        // Custom Animated Glowing Border Timer
+        javax.swing.Timer glowingBorderTimer = new javax.swing.Timer(50, new java.awt.event.ActionListener() {
+            float hue = 0.45f; // Start at Aqua Blue
+            boolean shiftingUp = true;
+            
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                // Smoothly shift the color hue back and forth
+                if (shiftingUp) {
+                    hue += 0.005f;
+                    if (hue > 0.85f) shiftingUp = false; // Reverse at Purple/Pink
+                } else {
+                    hue -= 0.005f;
+                    if (hue < 0.45f) shiftingUp = true; // Reverse at Aqua Blue
+                }
+                
+                // Generate the new color and apply a 3-pixel thick rounded border
+                java.awt.Color animatedColor = java.awt.Color.getHSBColor(hue, 0.8f, 0.9f);
+                javax.swing.border.Border smoothBorder = javax.swing.BorderFactory.createLineBorder(animatedColor, 3, true);
+                
+                // Apply the animated border to your main panels
+                jPanel1.setBorder(smoothBorder); // Sidebar panel
+                panel_load.setBorder(smoothBorder); // Main loading panel
+                jPanel3.setBorder(smoothBorder); // Top panel
+            }
+        });
+        glowingBorderTimer.start();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -35,12 +150,21 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         home_bnt_grp.add(jToggleButton1);
         jToggleButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aquapluspos/images/search x30.png"))); // NOI18N
         jToggleButton1.setText("DASHBOARD");
+        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jToggleButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jToggleButton1MouseExited(evt);
+            }
+        });
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -143,6 +267,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(206, Short.MAX_VALUE))
         );
 
+        panel_load.setBackground(new java.awt.Color(0, 0, 0));
         panel_load.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout panel_loadLayout = new javax.swing.GroupLayout(panel_load);
@@ -156,6 +281,7 @@ public class Home extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -257,6 +383,30 @@ public class Home extends javax.swing.JFrame {
         //jpload.jPanelLoader(panel_load, rp);
         
     }//GEN-LAST:event_jToggleButton7ActionPerformed
+
+    private void jToggleButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseEntered
+
+
+        // Slides the text away from the icon and makes the font slightly larger
+jToggleButton1.setIconTextGap(15); 
+jToggleButton1.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 15));
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1MouseEntered
+
+    private void jToggleButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseExited
+
+
+            // Returns the spacing and font to their original default sizes
+jToggleButton1.setIconTextGap(4); 
+jToggleButton1.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 14));
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1MouseExited
 
     /**
      * @param args the command line arguments
