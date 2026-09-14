@@ -153,6 +153,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jToggleButton1.setBackground(new java.awt.Color(102, 102, 255));
         home_bnt_grp.add(jToggleButton1);
         jToggleButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aquapluspos/images/search x30.png"))); // NOI18N
@@ -184,7 +185,7 @@ public class Home extends javax.swing.JFrame {
         home_bnt_grp.add(jToggleButton3);
         jToggleButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aquapluspos/images/sales_menu.png"))); // NOI18N
-        jToggleButton3.setText("CART");
+        jToggleButton3.setText("EMPLOYEE");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
@@ -351,9 +352,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // pro load
-        //product pro =new product();
-        //jpload.jPanelLoader(panel_load, pro);
+        
+        
+        
+           // emp load
+        
+        employee emp =new employee();
+        jpload.jPanelLoader(panel_load, emp);
         
         
         
